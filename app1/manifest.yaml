@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1
+  # these are replicaset labels
+  labels:
+    app: app1
+spec:
+  replicas: 2
+  selector:
+  #replicaset use those labels to identify its pods
+    matchLabels:
+      app: app1
+  #pod template
+  template:
+    metadata:
+      # these are pod labels
+      labels:
+        app: app1
+    spec:
+      containers:
+        - name: nginxapp1
+          image: devsecopswithaws/app1:1.0.0
+          ports:
+            - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  selector: #labels used as selectors
+    app: app1
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
