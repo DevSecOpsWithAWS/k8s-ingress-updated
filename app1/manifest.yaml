@@ -40,8 +40,9 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-    alb.ingress.kubernetes.io/group.name: joindevops
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:135334155729:certificate/f6d02aac-e1a8-4416-9028-44431d37b194
+    alb.ingress.kubernetes.io/group.name: sridevsecops
 spec:
   ingressClassName: alb
   rules:
