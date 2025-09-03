@@ -37,7 +37,7 @@ kind: Ingress
 metadata:
   name: app1-ingress
   annotations:
-    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/ingressClassName: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/healthcheck-path: /
