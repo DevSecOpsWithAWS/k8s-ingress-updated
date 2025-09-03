@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app1
+  name: app2
   labels:
-    app: app1
+    app: app2
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: app1
+      app: app2
   template:
     metadata:
       labels:
-        app: app1
+        app: app2
     spec:
       containers:
-      - name: app1
-        image: devsecopswithaws/app1:1.0.1
+      - name: app2
+        image: devsecopswithaws/app2:1.0.1
         ports:
         - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: app1
+  name: app2
 spec:
   selector:
-    app: app1
+    app: app2
   ports:
   - protocol: TCP
     port: 80
@@ -35,7 +35,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app1-ingress-updated
+  name: app2-ingress-updated
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
@@ -47,13 +47,13 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: app1.sridevsecops.store
+  - host: app2.sridevsecops.store
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: app1
+            name: app2
             port:
               number: 80
