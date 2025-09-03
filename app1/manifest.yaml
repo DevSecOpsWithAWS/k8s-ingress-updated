@@ -37,7 +37,6 @@ kind: Ingress
 metadata:
   name: app1-ingress
   annotations:
-    alb.ingress.kubernetes.io/ingressClassName: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/healthcheck-path: /
@@ -45,6 +44,7 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:135334155729:certificate/116ba22f-4d09-4274-97fc-3c7a335b6ea9
     alb.ingress.kubernetes.io/ssl-redirect: "443"
 spec:
+  ingressClassName: alb
   rules:
   - host: app1.sridevsecops.store
     http:
