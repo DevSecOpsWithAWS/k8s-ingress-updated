@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app1
-        image: joindevops/app1:1.0.0
+        image: devsecopswithaws/app1:1.0.1
         ports:
         - containerPort: 80
 ---
@@ -42,7 +42,7 @@ metadata:
     alb.ingress.kubernetes.io/healthcheck-path: /
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:135334155729:certificate/116ba22f-4d09-4274-97fc-3c7a335b6ea9
-    alb.ingress.kubernetes.io/group.name: joindevops
+    alb.ingress.kubernetes.io/group.name: devsecopswithaws
 spec:
   ingressClassName: alb
   rules:
