@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app1
-  # labels of deployment resource
   labels:
     app: app1
 spec:
@@ -21,16 +20,16 @@ spec:
         ports:
         - containerPort: 80
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: app1
 spec:
-  selector: # labels are used as selectors
+  selector:
     app: app1
   ports:
   - protocol: TCP
-    port: 80 # service port
+    port: 80
     targetPort: 80
 ---
 apiVersion: networking.k8s.io/v1
@@ -40,9 +39,9 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/certificate-arn:  arn:aws:acm:us-east-1:135334155729:certificate/116ba22f-4d09-4274-97fc-3c7a335b6ea9
-    alb.ingress.kubernetes.io/group.name: sridevsecops
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    alb.ingress.kubernetes.io/actions.group.name: sridevsecops
+    alb.ingress.kubernetes.io/healthcheck-path: /
 spec:
   ingressClassName: alb
   rules:
@@ -50,10 +49,9 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: /
         backend:
           service:
             name: app1
             port:
               number: 80
-
