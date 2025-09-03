@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app1
-        image: devsecopswithaws/app1:1.0.1
+        image: joindevops/app1:1.0.0
         ports:
         - containerPort: 80
 ---
@@ -35,17 +35,14 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app1-ingress-updated
+  name: app1
   annotations:
-    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/healthcheck-path: /
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:135334155729:certificate/116ba22f-4d09-4274-97fc-3c7a335b6ea9
-    alb.ingress.kubernetes.io/ssl-redirect: "443"
-    alb.ingress.kubernetes.io/group.name: devsecopswithaws
-    alb.ingress.kubernetes.io/subnets: subnet-0a79396506b6a89e7,subnet-0cd9dfcdf01ec9006
+    alb.ingress.kubernetes.io/group.name: joindevops
 spec:
   ingressClassName: alb
   rules:
